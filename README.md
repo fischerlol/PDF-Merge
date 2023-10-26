@@ -18,7 +18,7 @@ Before you get started, make sure you have the following installed:
 
 1. Clone the repository to your local machine:
 ```bash
-git clone https://github.com/your-username/pdf-merge-tool.git
+git clone https://github.com/fischerlol/PDF-Merge.git
 ```
 
 2. Navigate to the project directory:
