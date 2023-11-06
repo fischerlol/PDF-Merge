@@ -9,7 +9,6 @@ def pdf_merge(directory, current, file, output):
     pdf_merger = PdfMerger()
 
     ensure_exclusivity(directory, current, file)
-    output = change_extension(output)
 
     if directory:
         merge_pdf_directory(directory, pdf_merger, output)
@@ -28,7 +27,7 @@ def merge_pdf_directory(directory, pdf_merger, output):
         sys.exit(1)
 
     progress_bar(valid_files, f'Merging {len(valid_files)} files from directory', pdf_merger)
-    merge_and_print_output(valid_files, pdf_merger, directory)
+    merge_and_print_output(valid_files, pdf_merger, directory, output)
 
 def merge_pdf_files(files, pdf_merger, output):
     valid_files, invalid_files = get_valid_and_invalid_files(files)
@@ -36,12 +35,11 @@ def merge_pdf_files(files, pdf_merger, output):
     handle_invalid_files(invalid_files)
 
     progress_bar(valid_files, f'Merging {", ".join(valid_files)} :', pdf_merger)
-    merge_and_print_output(valid_files, pdf_merger, os.getcwd(), True)
+    merge_and_print_output(valid_files, pdf_merger, os.getcwd(), output, True)
 
 def merge_pdf_current_directory(pdf_merger, output):
     directory = os.getcwd()
     directory_listing = os.listdir(directory)
-    print(f"merge_pdf_current_directory: the current directory is: {directory}")
 
     valid_files, invalid_files = get_valid_and_invalid_files(directory_listing)
 
@@ -50,7 +48,7 @@ def merge_pdf_current_directory(pdf_merger, output):
         sys.exit(1)
 
     progress_bar(valid_files, f'Merging {len(valid_files)} files from {directory}', pdf_merger)
-    merge_and_print_output(valid_files, pdf_merger, directory)
+    merge_and_print_output(valid_files, pdf_merger, directory, output)
 
 if __name__ == "__main__":
     pdf_merge()

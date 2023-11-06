@@ -62,9 +62,14 @@ def is_valid_pdf_file(file_path):
     except Exception as e:
         return False
 
-def merge_and_print_output(valid_files, pdf_merger, directory, echo=False):
-    output_path = generate_file_name(directory)
+def merge_and_print_output(valid_files, pdf_merger, directory, output=None, echo=False):
+    if output:
+        output_path = generate_file_name(directory, output)
+    else:
+        output_path = generate_file_name(directory)
+
     save_output(output_path, pdf_merger)
+
     if echo:
         click.echo(click.style(f'Successfully merged {len(valid_files)} PDF files into {output_path}', fg='green'))
     else:
